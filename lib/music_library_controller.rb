@@ -40,7 +40,7 @@ class MusicLibraryController
         break
       else
         "Type in a valid request please"
-
+end
       # if answer == 'exit'
       #   break
       end
