@@ -1,5 +1,4 @@
 class Song
-
   attr_accessor :name
   @@all = []
 
@@ -7,11 +6,11 @@ class Song
     @name = name
     @genre = genre
     if artist != nil
-    self.artist = artist
-  end
-  if genre != nil
-    self.genre = genre
-  end
+      self.artist = artist
+    end
+    if genre != nil
+      self.genre = genre
+    end
     save
   end
 
@@ -32,14 +31,14 @@ class Song
     new_song
   end
 
-def artist
-  @artist
-end
+  def artist
+    @artist
+  end
 
-def artist=(artist)
-  @artist = artist
-  artist.add_song(self)
-end
+  def artist=(artist)
+    @artist = artist
+    artist.add_song(self)
+  end
 
   def genre
     @genre
@@ -57,8 +56,22 @@ end
   end
 
   def self.find_or_create_by_name(name)
-  self.find_by_name(name) || self.create(name)
+    self.find_by_name(name) || self.create(name)
 
   end
+
+  def self.new_from_filename(filename)
+    artist, song, genre = filename.split(" - ")
+    fixed = genre.gsub('.mp3', "")
+    artist = Artist.find_or_create_by_name(artist)
+    genre = Genre.find_or_create_by_name(fixed)
+    new(song, artist, genre)
+  end
+
+  def self.create_from_filename(filename)
+    new_from_filename(filename).save
+  end
+
+
 
 end
