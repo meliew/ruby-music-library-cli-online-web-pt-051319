@@ -11,7 +11,7 @@ class Song
     if genre != nil
       self.genre = genre
     end
-    save
+    # save
   end
 
   def self.all
@@ -27,8 +27,9 @@ class Song
   end
 
   def self.create(name)
-    new_song = self.new(name)
-    new_song
+    song = self.new(name)
+    song.save
+    song
   end
 
   def artist
